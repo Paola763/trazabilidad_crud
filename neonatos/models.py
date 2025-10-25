@@ -86,9 +86,9 @@ class Parto(models.Model):
     ACOMPANAMIENTO = [
         ("ninguno", "Ninguno"),
         ("trabajo_parto", "Trabajo de parto"),
-        ("expulsivo", "Expulsivo"),
-    TIPO_PARTO_VAGINAL = "vaginal"
-    TIPO_PARTO_CESAREA = "cesarea"
+        ("expulsivo", "Expulsivo")]
+    TIPO_PARTO_VAGINAL = "vaginal",
+    TIPO_PARTO_CESAREA = "cesarea",
     TIPO_PARTO_CHOICES = [
         (TIPO_PARTO_VAGINAL, "Vaginal"),
         (TIPO_PARTO_CESAREA, "Cesárea"),
@@ -145,7 +145,7 @@ class RecienNacido(models.Model):
         ("formula", "Fórmula"),
         ("no_amamantado", "No amamantado"),
         ("HTLV_VIH", "HTLV/VIH"),
-        ("Ley21155", "Ley 21.155"),
+        ("Ley21155", "Ley 21.155")],
     SEXO_FEMENINO = "F"
     SEXO_MASCULINO = "M"
     SEXO_CHOICES = [

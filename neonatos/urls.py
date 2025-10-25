@@ -24,6 +24,6 @@ urlpatterns = [
     path("comp/nuevo/", views.CompCreate.as_view(), name="comp_create"),
     path("comp/<int:pk>/editar/", views.CompUpdate.as_view(), name="comp_update"),
     path("comp/<int:pk>/eliminar/", views.CompDelete.as_view(), name="comp_delete"),
-]
+
     path("buscar/", views.BuscarPorRUTView.as_view(), name="buscar_rut"),
 ]

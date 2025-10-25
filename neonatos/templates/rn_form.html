@@ -7,6 +7,45 @@
   <div class="mt-3">
     <button class="btn btn-primary" type="submit">Guardar</button>
     <a class="btn btn-secondary" href="{% url 'rn_list' %}">Volver</a>
+<div class="card shadow-sm">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">{{ view.object|default:"Nuevo recién nacido" }}</h5>
   </div>
 </form>
+{% endblock %}
+  <div class="card-body">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% for field in form %}
+      <div class="mb-3">
+        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+        <div class="form-text">{{ field.help_text }}</div>
+        {% endif %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback d-block">{{ error }}</div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Guardar y finalizar</button>
+      <a href="{% url 'rn_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+{% endblock %}
+{% block extra_js %}
+<script>
+  document.querySelectorAll('[title]').forEach((tooltipTriggerEl) => {
+    if (window.bootstrap) {
+      new bootstrap.Tooltip(tooltipTriggerEl);
+    }
+  });
+</script>
 {% endblock %}

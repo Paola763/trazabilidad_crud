@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Buscar por RUT</h5>
+  </div>
+  <div class="card-body">
+    <form method="get" class="row g-3 mb-4" novalidate>
+      <div class="col-md-8">
+        <label class="form-label" for="id_q">RUT</label>
+        <input type="text" name="q" id="id_q" class="form-control" value="{{ query }}" placeholder="12.345.678-5" title="Busca por RUT con guion" />
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button class="btn btn-primary w-100" type="submit">Buscar</button>
+      </div>
+    </form>
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    {% if resultados %}
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th>RUT</th>
+            <th>Nombre completo</th>
+            <th>Teléfono móvil</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for madre in resultados %}
+          <tr>
+            <td>{{ madre.rut }}</td>
+            <td>{{ madre.nombres }} {{ madre.apellidos }}</td>
+            <td>{{ madre.telefono_movil }}</td>
+            <td>
+              <a class="btn btn-sm btn-outline-primary" href="{% url 'madre_update' madre.pk %}">Editar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% elif query and not error %}
+    <div class="alert alert-warning">No se encontraron madres con el RUT ingresado.</div>
+    {% endif %}
+  </div>
+{% endblock %}
+{% block extra_js %}
+<script>
+  document.querySelectorAll('[title]').forEach((tooltipTriggerEl) => {
+    if (window.bootstrap) {
+      new bootstrap.Tooltip(tooltipTriggerEl);
+    }
+  });
+</script>
+{% endblock %}

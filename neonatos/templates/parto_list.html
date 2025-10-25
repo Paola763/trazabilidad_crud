@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Partos</h3>
+  <a class="btn btn-success" href="{% url 'parto_create' %}">Nuevo Parto</a>
+</div>
+<table class="table table-striped table-bordered bg-white">
+  <thead>
+    <tr>
+      <th>ID</th><th>Madre</th><th>Fecha</th><th>Tipo</th><th>EG</th><th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in object_list %}
+    <tr>
+      <td>{{ p.id_parto }}</td>
+      <td>{{ p.madre }}</td>
+      <td>{{ p.fecha_parto }}</td>
+      <td>{{ p.get_tipo_parto_display }}</td>
+      <td>{{ p.edad_gestacional }}</td>
+      <td>
+        <a class="btn btn-sm btn-primary" href="{% url 'parto_update' p.pk %}">Editar</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'parto_delete' p.pk %}">Eliminar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-center">No hay registros</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
